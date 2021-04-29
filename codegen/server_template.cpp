@@ -244,7 +244,7 @@ const char *PHXRPC_EPOLL_SERVER_CONFIG_CPP_TEMPLATE =
 $ServerConfigClass$::$ServerConfigClass$(const char *config_file) {
     Read(config_file);
     Mode mode=(Mode)ep_server_config_.GetMode();
-    std::string path(ep_server_config_.GetOsdInofPath());
+    std::string path(ep_server_config_.GetOsdInfoPath());
     disk_control_ = new DiskControl(mode,path);
     std::cout << "构造 addr: " << disk_control_ << " mode: "<<mode<< std::endl;
 }

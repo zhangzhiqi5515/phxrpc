@@ -105,8 +105,8 @@ class HshaServerConfig : public ServerConfig {
 /* This is coldstor modification */
     void SetMode(const int mode);
     int GetMode() const;
-    void SetOsdInofPath(const char *osd_info_file_path);
-    const char *GetOsdInofPath() const;
+    void SetOsdInfoPath(const char *osd_info_file_path);
+    const char *GetOsdInfoPath() const;
 /* End of modification */
   private:
     int max_connections_;

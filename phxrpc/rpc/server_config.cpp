@@ -282,10 +282,10 @@ namespace phxrpc
     {
         return mode_;
     }
-    void HshaServerConfig::SetOsdInofPath(const char *osd_info_file_path){
+    void HshaServerConfig::SetOsdInfoPath(const char *osd_info_file_path){
         strncpy(osd_info_file_path_, osd_info_file_path, sizeof(osd_info_file_path_) - 1);
     }
-    const char * HshaServerConfig::GetOsdInofPath() const{
+    const char *HshaServerConfig::GetOsdInfoPath() const{
         return osd_info_file_path_;
     }
 /* End of modification */
