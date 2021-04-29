@@ -244,7 +244,8 @@ const char *PHXRPC_EPOLL_SERVER_CONFIG_CPP_TEMPLATE =
 $ServerConfigClass$::$ServerConfigClass$(const char *config_file) {
     Read(config_file);
     Mode mode=(Mode)ep_server_config_.GetMode();
-    disk_control_ = new DiskControl(mode);
+    std::string path(ep_server_config_.GetOsdInofPath());
+    disk_control_ = new DiskControl(mode,path);
     std::cout << "构造 addr: " << disk_control_ << " mode: "<<mode<< std::endl;
 }
 
@@ -285,6 +286,7 @@ MaxQueueLength = 20480
 FastRejectThresholdMS = 20
 FastRejectAdjustRate = 5
 Mode = 2
+OSD_INFO_FILE_PATH=/home/coldstor/ceph/src/cold-disk/disk-control-rpc/osd_info.csv
 [Log]
 LogDir = ~/log
 LogLevel = 3

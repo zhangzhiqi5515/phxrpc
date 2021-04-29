@@ -20,7 +20,9 @@ See the AUTHORS file for names of contributors.
 */
 
 #include <cstring>
-
+#include <iostream>
+#include <regex>
+#include <string>
 #include "server_config.h"
 #include "phxrpc/file.h"
 
@@ -171,9 +173,11 @@ namespace phxrpc
           io_thread_count_(3),
           worker_uthread_count_(0),
           worker_uthread_stack_size_(64 * 1024),
+          /* This is coldstor modification */
           mode_(1)
+          /* End of modification */
     {
-        
+        memset(osd_info_file_path_, 0, sizeof(osd_info_file_path_));
     }
 
     HshaServerConfig::~HshaServerConfig()
@@ -192,7 +196,10 @@ namespace phxrpc
         config.ReadItem(server_section_name, "MaxQueueLength", &max_queue_length_, 20480);
         config.ReadItem(server_section_name, "FastRejectThresholdMS", &fast_reject_threshold_ms_, 20);
         config.ReadItem(server_section_name, "FastRejectAdjustRate", &fast_reject_adjust_rate_, 5);
+        /* This is coldstor modification */
         config.ReadItem(server_section_name, "Mode", &mode_, 1);
+        config.ReadItem(server_section_name, "OSD_INFO_FILE_PATH", osd_info_file_path_, sizeof(osd_info_file_path_));
+        /* End of modification */
         return true;
     }
 
@@ -265,7 +272,7 @@ namespace phxrpc
     {
         return worker_uthread_stack_size_;
     }
-
+/* This is coldstor modification */
     void HshaServerConfig::SetMode(const int mode)
     {
         mode_=mode;
@@ -275,5 +282,11 @@ namespace phxrpc
     {
         return mode_;
     }
-
+    void HshaServerConfig::SetOsdInofPath(const char *osd_info_file_path){
+        strncpy(osd_info_file_path_, osd_info_file_path, sizeof(osd_info_file_path_) - 1);
+    }
+    const char * HshaServerConfig::GetOsdInofPath() const{
+        return osd_info_file_path_;
+    }
+/* End of modification */
 } // namespace phxrpc

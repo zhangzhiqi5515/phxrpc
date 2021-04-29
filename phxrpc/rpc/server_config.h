@@ -102,9 +102,12 @@ class HshaServerConfig : public ServerConfig {
 
     void SetWorkerUThreadStackSize(const int worker_uthread_stack_size);
     int GetWorkerUThreadStackSize() const;
-
+/* This is coldstor modification */
     void SetMode(const int mode);
     int GetMode() const;
+    void SetOsdInofPath(const char *osd_info_file_path);
+    const char *GetOsdInofPath() const;
+/* End of modification */
   private:
     int max_connections_;
     int max_queue_length_;
@@ -113,7 +116,10 @@ class HshaServerConfig : public ServerConfig {
     int io_thread_count_;
     int worker_uthread_count_;
     int worker_uthread_stack_size_;
+  /* This is coldstor modification */
     int mode_;
+    char osd_info_file_path_[150];
+  /* End of modification */
 };
 
 
